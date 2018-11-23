@@ -2,12 +2,15 @@ import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index'
 
 import './app.scss'
+require("taro-ui/dist/weapp/css/index.css")
 
 class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      'pages/list_page/index',
+      'pages/sku_page/index',
+      'pages/index/index',
     ],
     window: {
       backgroundTextStyle: 'light',

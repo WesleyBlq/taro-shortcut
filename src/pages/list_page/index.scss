@@ -1,0 +1,37 @@
+.classify {
+  // margin-left: 20px;
+  color: red; // background-color: blue;
+  .title {
+    font-size: 40px;
+    color: black;
+    font-weight: 400;
+    margin-left: 20px;
+  }
+  .detail {
+    font-size: 30px;
+    font-weight: 500;
+    color: #aaa6a6;
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+  .at-row {
+    // padding: 0 20px 0 0;
+    // margin:0 20px 0 20px;
+    // margin-left: 20px;
+    margin-top: 10px;
+    width: 80%; // background-color: yellow;
+    .item {
+      margin-left: 20px;
+      border-radius: 30px; // text-align: center; // width: 30%;
+      height: 200px;
+      padding: 0 20px 0 30px; // margin-left: 20px;
+      width: 20%;
+      .icon {
+        margin-top: 50px;
+      }
+      .name {
+        margin-top: 10px;
+      }
+    }
+  }
+}
