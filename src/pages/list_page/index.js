@@ -12,25 +12,65 @@ export default class Index extends Component {
     navigationBarTitleText: ''
   }
 
+  get_list_datas() {
+    console.log("======######");
+    console.log("get_list_datas");
+    console.log(this.$router.params);
+    if (this.$router.params["arrow"] != undefined) {
+      const id = this.$router.params["id"];
+      const arrow = this.$router.params["arrow"];
+      for (let index in classify.postList) {
+        if (classify.postList[index]["id"] == parseInt(id)) {
+          return classify.postList[index][arrow];
+        }
+      }
+    }else {
+      const id = this.$router.params["id"];
+      console.log("======######");
+      console.log(classify.scrollList);
+      console.log(id);
+      for (let index in classify.scrollList) {
+        if (classify.postList[index]["id"] == parseInt(id)) {
+          return classify.scrollList[index];
+        }
+      }
+    }
+    
+  }
+
   render() {
+    let datas = this.get_list_datas();
+
+    console.log(datas);
+    let collection = datas["collection"];
     return (
       <View className='classify'>
         <View>
-          <Text className="title" >分类</Text>
+          <Text className="title" >{datas["title"]}</Text>
         </View>
 
-        <View className="detail" >使用这些捷径，让你事半功倍!</View>
+        <View className="detail" >{datas["description"]}</View>
         {
-          classify.postList.map((data) => {
+          collection.map((data) => {
             let left_style = "fa fa-" + data["left"]["icon"] + " icon";
             let right_style = "fa fa-" + data["right"]["icon"] + " icon";
+            let left_background_color = "background-color:" + data["left"]["background_color"]
+            let right_background_color = "background-color:" + data["right"]["background_color"]
+
+
             return <View className='at-row' key={data.id} >
-              <View className='at-col at-col-6 item' style="background-color: rgb(26, 173, 25);" >
-                <View className={left_style} style="color: blue;" ></View>
+              <View className='at-col at-col-6 item'
+                style={left_background_color}
+                onClick={this.on_click_event.bind(this, data["left"])} >
+
+                <View className={left_style}  ></View>
                 <View className="name" > {data["left"]["title"]} </View>
               </View>
-              <View className='at-col at-col-6 item' style="background-color: gray" >
-                <View className={right_style} style="color: blue;" ></View>
+              <View className='at-col at-col-6 item'
+                style={right_background_color}
+                onClick={this.on_click_event.bind(this, data["right"])} >
+
+                <View className={right_style}  ></View>
                 <View className="name" > {data["right"]["title"]} </View>
               </View>
             </View>
@@ -39,4 +79,14 @@ export default class Index extends Component {
       </View>
     )
   }
+
+  on_click_event(data) {
+    console.log("on_click_event:data  " + data);
+    console.log(data);
+    const params = "?icon=" + data["icon"] + "&title=" + data["title"] + "&url=" + data["url"] + "&color=" + data["background_color"]
+    Taro.navigateTo({
+      url: '/pages/sku_page/index' + params,
+    })
+  }
+  
 }

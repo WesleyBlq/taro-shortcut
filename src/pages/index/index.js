@@ -14,7 +14,6 @@ export default class Index extends Component {
   }
 
   componentWillMount () {
-    // console.log(classify.postList)
    }
 
   componentDidMount () { }
@@ -27,24 +26,24 @@ export default class Index extends Component {
 
   render () {
 
-    const datas = [];
+    // const datas = [];
     // for (var i in classify.postList) {
     //   console.log("######");
     //   console.log(i);  
     //   datas.push(
-    //     <View className="fa fa-star icon" style="color: blue;" >ss</View>
+    //     <View className="fa fa-star icon"  >ss</View>
     //   );
     //   console.log(datas);
     // }
     // classify.postList.forEach(element => {
 
     //   datas.push(
-    //     <View className="fa fa-star icon" style="color: blue;" ></View>
+    //     <View className="fa fa-star icon"  ></View>
     //   );
     // });
     console.log("======");
-    console.log(datas);
-    console.log(classify.postList);
+    // console.log(datas);
+    // console.log(classify.postList);
 
     return (
       <View className='index'>
@@ -59,23 +58,23 @@ export default class Index extends Component {
             scrollWithAnimation
             scrollLeft='0'
           >
-
-            <View className="scroll_item " style="background-color: rgb(26, 173, 25);" >
-              <View className="fa fa-star icon" style="color: blue;" ></View>
-              <View className="name" >共享效率</View>
-            </View>
-            <View className="scroll_item " style="background-color: #74CAFF;" >
-              <View className="fa fa-star icon" style="color: blue;" ></View>
-              <View className="name" >共享效率</View>
-            </View>
-            <View className="scroll_item " style="background-color: #52B03C;" >
-              <View className="fa fa-star icon" style="color: blue;" ></View>
-              <View className="name" >共享效率</View>
-            </View>
-            <View className="scroll_item " style="background-color: rgb(26, 173, 25);" >
-              <View className="fa fa-star icon" style="color: blue;" ></View>
-              <View className="name" >共享效率</View>
-            </View>
+            {
+              classify.scrollList.map((data) => {
+                let background_color = "background-color:" + data["background_color"];
+                let icon_style = "fa fa-" + data["icon"] + " icon";
+                console.log()
+                console.log(data);
+                return (
+                  <View className="scroll_item" 
+                    key={data.id} 
+                    style={background_color} 
+                    onClick={this.on_click_event.bind(this, data.id)}>
+                    <View className={icon_style}  ></View>
+                    <View className="name" >{data["title"]}</View>
+                  </View>
+                )
+              })
+            }
           </ScrollView>
 
         </View>
@@ -92,13 +91,23 @@ export default class Index extends Component {
             classify.postList.map((data) => {
               let left_style = "fa fa-" + data["left"]["icon"] + " icon";
               let right_style = "fa fa-" + data["right"]["icon"] + " icon";
+              let left_background_color = "background-color:" + data["left"]["background_color"]
+              let right_background_color = "background-color:" + data["right"]["background_color"]
+              
+
               return <View className='at-row' key={data.id} >
-                <View className='at-col at-col-6 item' style="background-color: rgb(26, 173, 25);" >
-                  <View className={left_style} style="color: blue;" ></View>
+                <View className='at-col at-col-6 item' 
+                  style={left_background_color}
+                  onClick={this.on_click_event.bind(this, data.id, "left")} >
+
+                  <View className={left_style}  ></View>
                   <View className="name" > {data["left"]["title"]} </View>
                 </View>
-                <View className='at-col at-col-6 item' style="background-color: gray" >
-                  <View className={right_style} style="color: blue;" ></View>
+                <View className='at-col at-col-6 item' 
+                  style={right_background_color} 
+                  onClick={this.on_click_event.bind(this, data.id, "right")} >
+                  
+                  <View className={right_style}  ></View>
                   <View className="name" > {data["right"]["title"]} </View>
                 </View>
               </View>
@@ -113,5 +122,22 @@ export default class Index extends Component {
       </View>
     )
   }
+
+  
+
+  on_click_event(classify_id, arrow) {
+    console.log("on_click_event:classify_id  " + classify_id);
+    let params = "";
+    console.log(arrow);
+    if(arrow == undefined) {
+      params = "?id=" + classify_id;
+    }else {
+      params = "?id=" + classify_id + "&arrow=" + arrow;
+    }
+    Taro.navigateTo({
+      url: '/pages/list_page/index' + params,
+    })
+  }
 }
+
 

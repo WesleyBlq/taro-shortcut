@@ -10,7 +10,6 @@
       margin-top: 20px;
       font-size: 60px;
     }
-    
     .func {
       background-color: #eeeeee;
       padding: 20px;
@@ -29,6 +28,12 @@
     // margin-top: -50px; // bottom: -50px;
     .get_btn {
       width: 80%;
+    }
+    .illegal {
+      text-align: center;
+      margin: 50px 0 20px 0px;
+      font-size: 20px;
+      font-weight: 800;
     }
   }
 }

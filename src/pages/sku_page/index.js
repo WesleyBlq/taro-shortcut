@@ -18,17 +18,24 @@ export default class Index extends Component {
   }
 
   render() {
+    let icon_color = "color:" + this.$router.params["color"] + ";";
+    
+    console.log("icon_color");
+    console.log(this.$router.params);
+    console.log(icon_color);
     return (
       <View className="index">
         <View className="head">
-          <View className="fa fa-star icon" style="color: blue;" ></View>
-          <View className="title" >播放播放列表</View>
+          <View className="fa fa-star icon" style={icon_color} ></View>
+          <View className="title" >{this.$router.params["title"]}</View>
           <View className="func">
-            点击获取捷径，获取下载链接。打开浏览器，粘贴地址并打开。
+            <View>点击获取捷径，获取下载链接。打开浏览器，粘贴地址并打开。</View>
+            
           </View>
         </View>
         <View className="footer">
           <AtButton type='primary' className="get_btn" onClick={ this.set_clipboard } >获取捷径</AtButton>
+          <View className="illegal">本捷径链为网络搜集，如有侵权，请告知。</View>
         </View>
         {/* {
           this.state.show_toast && <AtToast
@@ -44,9 +51,11 @@ export default class Index extends Component {
     )
   }
 
+
+
   set_clipboard() {
     wx.setClipboardData({
-      data: "hello clipboard"
+      data: this.$router.params["url"],
     });
     // this.setState({
     //   show_toast: true
