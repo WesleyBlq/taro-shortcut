@@ -129,7 +129,9 @@ export default class Index extends Component {
     console.log("on_click_event:classify_id  " + classify_id);
     let params = "";
     console.log(arrow);
-    if(arrow == undefined) {
+    
+    // undefined means ascroll item
+    if(arrow == undefined) {  
       params = "?id=" + classify_id;
     }else {
       params = "?id=" + classify_id + "&arrow=" + arrow;

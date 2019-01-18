@@ -16,6 +16,8 @@ export default class Index extends Component {
     console.log("======######");
     console.log("get_list_datas");
     console.log(this.$router.params);
+
+    // undefined means srcoll items clicked event.
     if (this.$router.params["arrow"] != undefined) {
       const id = this.$router.params["id"];
       const arrow = this.$router.params["arrow"];
