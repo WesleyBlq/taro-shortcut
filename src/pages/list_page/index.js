@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Label, Icon } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
-import { AtToast } from "taro-ui"
+import { AtButton, AtToast } from 'taro-ui'
 import './index.scss'
 import '../app.scss'
 import classify from '../../data/classify'
@@ -11,14 +10,31 @@ export default class Index extends Component {
   config = {
     navigationBarTitleText: ''
   }
+  componentWillMount() {
+    console.log(">>>>>>class list_page func componentWillMount");
+  }
+
+  componentDidShow() { 
+    console.log(">>>>>>class list_page func componentDidShow");
+  }
 
   get_list_datas() {
-    console.log("======######");
-    console.log("get_list_datas");
-    console.log(this.$router.params);
+    console.log(">>>>>>class list_page func get_list_datas");
+    console.log(this.$router.params["arrow"]);
+    if (Object.keys(this.$router.params).length === 0) {
+      console.log("arrow none");
+
+      const id = 1;
+      for (let index in classify.scrollList) {
+        if (classify.postList[index]["id"] == parseInt(id)) {
+          return classify.scrollList[index];
+        }
+      }
+    }
 
     // undefined means srcoll items clicked event.
-    if (this.$router.params["arrow"] != undefined) {
+    if (this.$router.params["arrow"] != "scroll") {
+      console.log("arrow left right");
       const id = this.$router.params["id"];
       const arrow = this.$router.params["arrow"];
       for (let index in classify.postList) {
@@ -27,12 +43,13 @@ export default class Index extends Component {
         }
       }
     }else {
+      console.log("arrow scroll");
       const id = this.$router.params["id"];
-      console.log("======######");
-      console.log(classify.scrollList);
-      console.log(id);
+
+      console.log("scroll list data");
+      
       for (let index in classify.scrollList) {
-        if (classify.postList[index]["id"] == parseInt(id)) {
+        if (classify.scrollList[index]["id"] == parseInt(id)) {
           return classify.scrollList[index];
         }
       }
@@ -41,9 +58,13 @@ export default class Index extends Component {
   }
 
   render() {
-    let datas = this.get_list_datas();
+    console.log(">>>>>>class list_page func render");
 
+
+    let datas = this.get_list_datas();
+    console.log("data:")
     console.log(datas);
+    
     let collection = datas["collection"];
     return (
       <View className='classify'>
@@ -78,6 +99,10 @@ export default class Index extends Component {
             </View>
           })
         }
+        <View className="line"></View>
+        <View className="footer">
+          关注公众号浦风科技,获取更多。
+        </View>
       </View>
     )
   }

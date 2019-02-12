@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Label, Icon } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
-import { AtToast } from "taro-ui"
+import { AtButton, AtToast } from 'taro-ui'
 import './index.scss'
 import '../app.scss'
 
@@ -20,13 +19,11 @@ export default class Index extends Component {
   render() {
     let icon_color = "color:" + this.$router.params["color"] + ";";
     
-    console.log("icon_color");
-    console.log(this.$router.params);
-    console.log(icon_color);
+    const icon_style = "fa fa-" + this.$router.params["icon"] + " icon";
     return (
       <View className="index">
         <View className="head">
-          <View className="fa fa-star icon" style={icon_color} ></View>
+          <View className={ icon_style } style={icon_color} ></View>
           <View className="title" >{this.$router.params["title"]}</View>
           <View className="func">
             <View>点击获取捷径，获取下载链接。打开浏览器，粘贴地址并打开。</View>

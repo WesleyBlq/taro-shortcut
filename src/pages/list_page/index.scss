@@ -19,13 +19,14 @@
     // margin:0 20px 0 20px;
     // margin-left: 20px;
     margin-top: 10px;
-    width: 80%; // background-color: yellow;
+    width: 90%; // background-color: yellow;
     .item {
       margin-left: 20px;
       border-radius: 30px; // text-align: center; // width: 30%;
       height: 200px;
       padding: 0 20px 0 30px; // margin-left: 20px;
       width: 20%;
+      overflow: hidden;
       .icon {
         margin-top: 50px;
         color: white;
@@ -36,4 +37,21 @@
       }
     }
   }
+}
+
+.line {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 90%;
+  height: 2px;
+  background-color: #eeeeee; // background-color: black;
+}
+
+.footer {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }

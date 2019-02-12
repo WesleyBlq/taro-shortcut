@@ -13,37 +13,8 @@ export default class Index extends Component {
     navigationBarTitleText: ''
   }
 
-  componentWillMount () {
-   }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   render () {
-
-    // const datas = [];
-    // for (var i in classify.postList) {
-    //   console.log("######");
-    //   console.log(i);  
-    //   datas.push(
-    //     <View className="fa fa-star icon"  >ss</View>
-    //   );
-    //   console.log(datas);
-    // }
-    // classify.postList.forEach(element => {
-
-    //   datas.push(
-    //     <View className="fa fa-star icon"  ></View>
-    //   );
-    // });
-    console.log("======");
-    // console.log(datas);
-    // console.log(classify.postList);
+    console.log(">>>>>>>>class index func render");
 
     return (
       <View className='index'>
@@ -62,13 +33,15 @@ export default class Index extends Component {
               classify.scrollList.map((data) => {
                 let background_color = "background-color:" + data["background_color"];
                 let icon_style = "fa fa-" + data["icon"] + " icon";
-                console.log()
+
+                console.log("scrol view item data");
                 console.log(data);
+
                 return (
                   <View className="scroll_item" 
                     key={data.id} 
                     style={background_color} 
-                    onClick={this.on_click_event.bind(this, data.id)}>
+                    onClick={this.on_click_event.bind(this, data.id, "scroll")}>
                     <View className={icon_style}  ></View>
                     <View className="name" >{data["title"]}</View>
                   </View>
@@ -117,25 +90,19 @@ export default class Index extends Component {
 
         <View className="line"></View>
         <View className="footer">
-          投稿联系 254284297@qq.com
+          {/* 投稿联系 254284297@qq.com */}
+          关注公众号浦风科技,获取更多。
         </View>
       </View>
     )
   }
 
-  
-
   on_click_event(classify_id, arrow) {
-    console.log("on_click_event:classify_id  " + classify_id);
-    let params = "";
+    console.log(">>>>>>>class index func on_click_event")
+    console.log("classify_id  " + classify_id + ",arrow " + arrow);
     console.log(arrow);
+    let params = "?id=" + classify_id + "&arrow=" + arrow;
     
-    // undefined means ascroll item
-    if(arrow == undefined) {  
-      params = "?id=" + classify_id;
-    }else {
-      params = "?id=" + classify_id + "&arrow=" + arrow;
-    }
     Taro.navigateTo({
       url: '/pages/list_page/index' + params,
     })

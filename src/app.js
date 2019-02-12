@@ -1,3 +1,5 @@
+// 添加阿拉丁数据统计
+const ald = require('./utils/ald-stat.js')
 import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index'
 
@@ -21,14 +23,6 @@ class App extends Component {
       navigationBarTextStyle: 'black'
     }
   }
-
-  componentDidMount () {}
-
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
