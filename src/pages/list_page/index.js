@@ -54,18 +54,60 @@ export default class Index extends Component {
         }
       }
     }
-    
   }
+
+  update_icon(data) {
+    
+    if (data["left"]["icon"] == "star" || data["left"]["icon"] == "circle") {
+      data["left"]["icon"] = random_icon()
+    }
+
+    if (data["right"] && (data["right"]["icon"] == "star" || data["right"]["icon"] == "circle")) {
+      data["right"]["icon"] = random_icon()
+    }
+  }
+
+  
 
   render() {
     console.log(">>>>>>class list_page func render");
-
-
+    
     let datas = this.get_list_datas();
     console.log("data:")
     console.log(datas);
     
     let collection = datas["collection"];
+
+    const data_list = collection.map((data) => {
+
+      // 回传给icon , 方便绑定触发数据
+      this.update_icon(data);
+
+      const left_style = "fa fa-" + data["left"]["icon"] + " icon";
+      const left_background_color = "background-color:" + data["left"]["background_color"];
+      
+      const right_style = data["right"] ? "fa fa-" + data["right"]["icon"] + " icon" : 'display: hidden';
+      const right_background_color = data["right"] ? "background-color:" + data["right"]["background_color"] : 'display: hidden';
+      
+      return <View className='at-row' key={data.id} >
+        <View className='at-col at-col-6 item'
+          style={left_background_color}
+          onClick={this.on_click_event.bind(this, data["left"])} >
+
+          <View className={left_style}  ></View>
+          <View className="name" > {data["left"]["title"]} </View>
+        </View>
+        <View className='at-col at-col-6 item'
+          style={right_background_color}
+          onClick={this.on_click_event.bind(this, data["right"])} >
+
+          <View className={right_style}  ></View>
+          <View className="name" > {data["right"]["title"]} </View>
+        </View>
+      </View>  
+
+    })
+    
     return (
       <View className='classify'>
         <View>
@@ -73,32 +115,7 @@ export default class Index extends Component {
         </View>
 
         <View className="detail" >{datas["description"]}</View>
-        {
-          collection.map((data) => {
-            let left_style = "fa fa-" + data["left"]["icon"] + " icon";
-            let right_style = "fa fa-" + data["right"]["icon"] + " icon";
-            let left_background_color = "background-color:" + data["left"]["background_color"]
-            let right_background_color = "background-color:" + data["right"]["background_color"]
-
-
-            return <View className='at-row' key={data.id} >
-              <View className='at-col at-col-6 item'
-                style={left_background_color}
-                onClick={this.on_click_event.bind(this, data["left"])} >
-
-                <View className={left_style}  ></View>
-                <View className="name" > {data["left"]["title"]} </View>
-              </View>
-              <View className='at-col at-col-6 item'
-                style={right_background_color}
-                onClick={this.on_click_event.bind(this, data["right"])} >
-
-                <View className={right_style}  ></View>
-                <View className="name" > {data["right"]["title"]} </View>
-              </View>
-            </View>
-          })
-        }
+        { data_list }
         <View className="line"></View>
         <View className="footer">
           关注公众号浦风科技,获取更多。
@@ -110,10 +127,20 @@ export default class Index extends Component {
   on_click_event(data) {
     console.log("on_click_event:data  " + data);
     console.log(data);
+
+    if (data["type"] == "tap"){
+      return ;
+    }
+      
     const params = "?icon=" + data["icon"] + "&title=" + data["title"] + "&url=" + data["url"] + "&color=" + data["background_color"]
     Taro.navigateTo({
       url: '/pages/sku_page/index' + params,
     })
   }
-  
+}
+
+function random_icon() {
+  var collections = ["free-code-camp", "yelp", "vk", "trello", "ra", "ravelry", "star", "circle"];
+  var random_num = Math.floor(Math.random() * collections.length);
+  return collections[random_num];
 }

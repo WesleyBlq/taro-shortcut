@@ -121,12 +121,12 @@ var scroll_data = [
           "background_color": "rgb(248, 196, 113)",
           "url": "https://www.icloud.com/shortcuts/cae1c2b86ea74e81b3cd01e40e09adbd",
         },
-        "right": {
-          "icon": "picture-o",
-          "title": "清除照片",
-          "background_color": "rgb(93, 173, 226)",
-          "url": "https://www.icloud.com/shortcuts/90bfdaa3d6c74ce4831565691b54cd41",
-        },
+        // "right": {
+        //   "icon": "picture-o",
+        //   "title": "清除照片",
+        //   "background_color": "rgb(93, 173, 226)",
+        //   "url": "https://www.icloud.com/shortcuts/90bfdaa3d6c74ce4831565691b54cd41",
+        // },
       },
     ]
   },
@@ -137,21 +137,6 @@ var scroll_data = [
     "background_color": "#229954",
     "description": "视频类工具大集合",
     "collection": [
-      {
-        "id": 1,
-        "left": {
-          "icon": "star",
-          "title": "短视频去水印下载",
-          "background_color": "rgb(248, 196, 113)",
-          "url": "https://www.icloud.com/shortcuts/562b0137fbf34edbbecb79ebc883ea28",
-        },
-        "right": {
-          "icon": "circle",
-          "title": "bilbil视频下载",
-          "background_color": "rgb(93, 173, 226)",
-          "url": "https://www.icloud.com/shortcuts/d20deb3790c24804b5d3064e7ff0298c",
-        },
-      },
       {
         "id": 2,
         "left": {
@@ -164,7 +149,7 @@ var scroll_data = [
           "icon": "circle",
           "title": "抖音去水印下载",
           "background_color": "rgb(93, 173, 226)",
-          "url": "https://www.icloud.com/shortcuts/009f311bfa7245aa9e81e0702796d500",
+          "url": "https://www.icloud.com/shortcuts/c51becf9ae4a4306a43be0de40b2b9ac",
         },
       },
       {
@@ -227,6 +212,21 @@ var scroll_data = [
           "url": "https://www.icloud.com/shortcuts/e4429da10ee14137b33f1438cc28ad35",
         },
       },
+      {
+        "id": 8,
+        "left": {
+          "icon": "star",
+          "title": "快手视频下载",
+          "background_color": "rgb(248, 196, 113)",
+          "url": "https://www.icloud.com/shortcuts/0591e5e955ff4ba192973691cbd65fde",
+        },
+        "right": {
+          "icon": "circle",
+          "title": "全能视频2",
+          "background_color": "rgb(93, 173, 226)",
+          "url": "https://www.icloud.com/shortcuts/e4429da10ee14137b33f1438cc28ad35",
+        },
+      },
     ]
   }
 ]
@@ -266,7 +266,7 @@ var local_database = [
           },
           "right": {
             "icon": "circle",
-            "title": "QQ音乐无损下载",
+            "title": "QQ音乐下载",
             "background_color": "rgb(93, 173, 226)",
             "url": "https://www.icloud.com/shortcuts/ea5245bc161e4ddbb3c4fd8e9602c8a8",
           },
@@ -287,7 +287,22 @@ var local_database = [
             "url": "https://www.icloud.com/shortcuts/52a024cd3b6d42f0bcd9343199838350",
           },
         },
-        
+        {
+          "id": 4,
+          "left": {
+            "icon": "star",
+            "title": "无损音乐解析（QQ音乐）",
+            "background_color": "rgb(248, 196, 113)",
+            "url": "https://www.icloud.com/shortcuts/53893fff02ed489789f12b589a84ef74",
+          },
+          "right": {
+            "icon": "circle",
+            "title": "全网vip音乐搜索",
+            "background_color": "rgb(93, 173, 226)",
+            "url": "https://www.icloud.com/shortcuts/52a024cd3b6d42f0bcd9343199838350",
+          },
+        },
+
       ]
       
     },
@@ -335,12 +350,12 @@ var local_database = [
             "background_color": "rgb(248, 196, 113)",
             "url": "https://www.icloud.com/shortcuts/872892b856c94257ba3db104b464d4c0",
           },
-          "right": {
-            "icon": "circle",
-            "title": "清除照片",
-            "background_color": "rgb(93, 173, 226)",
-            "url": "https://www.icloud.com/shortcuts/90bfdaa3d6c74ce4831565691b54cd41",
-          },
+          // "right": {
+          //   "icon": "circle",
+          //   "title": "清除照片",
+          //   "background_color": "rgb(93, 173, 226)",
+          //   "url": "https://www.icloud.com/shortcuts/90bfdaa3d6c74ce4831565691b54cd41",
+          // },
         },
       ]
     },
