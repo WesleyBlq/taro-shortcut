@@ -3,7 +3,7 @@ import { View, Text, Label, Icon } from '@tarojs/components'
 import './index.scss'
 import '../app.scss'
 
-import classify from '../../data/classify'
+// import classify from '../../data/classify'
 
 
 
@@ -13,29 +13,64 @@ export default class Index extends Component {
     navigationBarTitleText: ''
   }
 
+  constructor() {
+    super();
+    this.state = {
+      scrollList: [],
+      postList: []
+    };
+  }
+
+  componentWillMount () {
+    // console.log(">>>>>>>>class index func componentWillMount");
+    Taro.request({
+      url: 'http://localhost:3000/api/v1/categories/scroll',
+      header: {
+        'content-type': 'application/json'
+      }
+    }).then(res => {
+      // console.log(">>>>>>>>taro request success");
+      this.setState({
+        scrollList: res.data
+      })
+    });
+
+    Taro.request({
+      url: 'http://localhost:3000/api/v1/categories/banner',
+      header: {
+        'content-type': 'application/json'
+      }
+    }).then(res => {
+      console.log(">>>>>>>>taro request success");
+      this.setState({
+        postList: res.data
+      })
+    })
+  }
+
   render () {
     console.log(">>>>>>>>class index func render");
     
-    const data_list = classify.postList.map((data) => {
+    const banner_list = this.state.postList.map((data) => {
       let left_style = "fa fa-" + data["left"]["icon"] + " icon";
       let right_style = "fa fa-" + data["right"]["icon"] + " icon";
-      let left_background_color = "background-color:" + data["left"]["background_color"]
-      let right_background_color = "background-color:" + data["right"]["background_color"]
+      let left_background_color = "background-color:" + data["left"]["color"]
+      let right_background_color = "background-color:" + data["right"]["color"]
 
       return <View className='at-row' key={data.id} >
         <View className='at-col at-col-6 item'
           style={left_background_color}
-          onClick={this.on_click_event.bind(this, data.id, "left")} >
+          onClick={this.on_click_event.bind(this, data["left"].id)} >
 
           <View className={left_style}  ></View>
-          <View className="name" > {data["left"]["title"]} </View>
+          <View className="name" > {data["left"]["name"]} </View>
         </View>
         <View className='at-col at-col-6 item'
           style={right_background_color}
-          onClick={this.on_click_event.bind(this, data.id, "right")} >
+          onClick={this.on_click_event.bind(this, data["right"].id)} >
 
           <View className={right_style}  ></View>
-          <View className="name" > {data["right"]["title"]} </View>
+          <View className="name" > {data["right"]["name"]} </View>
         </View>
       </View>
     })
@@ -44,7 +79,7 @@ export default class Index extends Component {
       <View className='index'>
         <View>
           <View>
-            <Text className="title" >捷径中心</Text>
+            <Text className="name" >捷径中心</Text>
           </View>
           <Text className="detail" >使用这些捷径，让你事半功倍！</Text>
           <ScrollView
@@ -54,8 +89,8 @@ export default class Index extends Component {
             scrollLeft='0'
           >
             {
-              classify.scrollList.map((data) => {
-                let background_color = "background-color:" + data["background_color"];
+              this.state.scrollList.map((data) => {
+                let background_color = "background-color:" + data["color"];
                 let icon_style = "fa fa-" + data["icon"] + " icon";
 
                 console.log("scrol view item data");
@@ -65,9 +100,9 @@ export default class Index extends Component {
                   <View className="scroll_item" 
                     key={data.id} 
                     style={background_color} 
-                    onClick={this.on_click_event.bind(this, data.id, "scroll")}>
+                    onClick={this.on_click_event.bind(this, data.id)}>
                     <View className={icon_style}  ></View>
-                    <View className="name" >{data["title"]}</View>
+                    <View className="name" >{data["name"]}</View>
                   </View>
                 )
               })
@@ -80,11 +115,11 @@ export default class Index extends Component {
         <ad unit-id="adunit-4cfce269f7b310b6"></ad>
         <View className='classify'>
           <View>
-            <Text className="title" >分类</Text>
+            <Text className="name" >分类</Text>
           </View>
           
           <View className="detail" >使用这些捷径，让你事半功倍!</View>
-          { data_list }
+          { banner_list }
         </View>
 
         <View className="line"></View>
@@ -96,11 +131,10 @@ export default class Index extends Component {
     )
   }
 
-  on_click_event(classify_id, arrow) {
+  on_click_event(classify_id) {
     console.log(">>>>>>>class index func on_click_event")
-    console.log("classify_id  " + classify_id + ",arrow " + arrow);
-    console.log(arrow);
-    let params = "?id=" + classify_id + "&arrow=" + arrow;
+    console.log("classify_id  " + classify_id);
+    let params = "?id=" + classify_id;
     
     Taro.navigateTo({
       url: '/pages/list_page/index' + params,

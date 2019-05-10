@@ -31,6 +31,8 @@ export default class Index extends Component {
           </View>
         </View>
         <View className="footer">
+          <ad unit-id="adunit-4cfce269f7b310b6"></ad>
+
           <AtButton type='primary' className="get_btn" onClick={ this.set_clipboard } >获取捷径</AtButton>
           <View className="illegal">本捷径链为网络搜集，如有侵权，请告知。</View>
         </View>
